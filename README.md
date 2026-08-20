@@ -1,80 +1,94 @@
-# 🎬 AI Video Director
+<p align="center">
+  <img src="assets/hero.svg" alt="🎬 AI Video Director Hero Banner" width="100%" />
+</p>
 
-動画の「演出意図」を、AIがプロの映像監督の視点で逆コンパイル（言語化）するStreamlitアプリケーションです。
+<h1 align="center">🎬 AI Video Director</h1>
 
-単なる物体認識（「犬が歩いている」等）ではなく、**カメラワーク、ライティング、色彩設計、そして総合的な演出意図**をマルチモーダルAI（VLM）が深く読み取り、詳細なレポートを出力します。
+<p align="center">
+  <strong>Reverse-compiling visual storytelling, cinematic camera work, lighting, and directorial intent using Vision-Language Models (VLM).</strong>
+</p>
 
-![image](./1.png)
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-project-structure">Structure</a> •
+  <a href="#-license">License</a>
+</p>
 
-## ✨ 機能 (Features)
-
-* **🎥 スマート・キーフレーム抽出**: 長時間の動画をそのままLLMに投げるのではなく、OpenCVを用いて自動で等間隔のキーフレームを抽出し、トークンコストを抑えつつ文脈を維持します。
-* **🧠 最先端VLMの切り替え**: OpenRouter APIを利用し、`google/gemini-3.1-pro-preview`, `qwen/qwen3.5-35b-a3b`, `bytedance-seed/seed-2.0-mini` などの強力な視覚言語モデルをUI上からシームレスに切り替えて検証可能です。
-* **📝 プロ品質の演出解析**: 以下の4つの専門的観点から映像を解剖します。
-  1. カメラワークと構図 (Camera Work & Composition)
-  2. ライティングと色彩設計 (Lighting & Color Design)
-  3. 登場人物の感情・状況の推移 (Emotions & Situation)
-  4. 総合的な演出意図 (Overall Directing Intent)
-
-## 💡 デモ・解析例 (Demo Output)
-
-**【入力動画】** 日常の犬の散歩風景（夕暮れ時、約12秒）
-
-**【AIの解析結果ハイライト（一部抜粋）】**
-> **🎥 カメラワークと構図**
-> 究極のローアングル（犬の目線への没入）：カメラは地面すれすれの極端なローアングルに設定されています。これにより、視聴者は人間の視座を下ろされ、言葉を持たない「犬の世界」へと物理的・心理的に没入させられます。終盤は「ラックフォーカス（ピント送り）」という高度な技術が使われ、空間の広がりと余韻を生み出しています。
-> 
-> **💡 ライティングと色彩設計**
-> ゴールデンアワーと逆光の魔術：強烈な逆光（バックライト）をあえてカメラレンズに直接入れることで、美しいレンズフレアを発生させています。リムライトによって犬の輪郭が黄金色に縁取られ、神々しさすら感じる柔らかい印象を与えています。
-> 
-> **🎬 総合的な演出意図**
-> このシーンでの最大の演出意図は、「日常の当たり前の瞬間を、人生のハイライトとして焼き付けること」にあります。ただ順光で鮮明に撮るのではなく、あえて強烈な逆光フレアで視界を奪い、浅い被写界深度（背景ボケ）を利用した、非常に詩的でエモーショナルな映像演出です。
-
-![image](./3.png)
-
-## 🚀 使い方 (Getting Started)
-
-### 1. リポジトリのクローン
-```bash
-git clone [https://github.com/your-username/ai-video-director.git](https://github.com/your-username/ai-video-director.git)
-cd ai-video-director
-
-```
-
-### 2. 依存パッケージのインストール
-
-Python 3.9以上を推奨します。
-
-```bash
-pip install -r requirements.txt
-
-```
-
-### 3. 環境変数の設定
-
-プロジェクトのルートディレクトリに `.env` ファイルを作成し、OpenRouterのAPIキーを設定してください。（`.env.example` をリネームして使用できます）
-
-```env
-OPENROUTER_API_KEY="your_api_key_here"
-
-```
-
-### 4. アプリケーションの起動
-
-```bash
-streamlit run app.py
-
-```
-
-ブラウザが自動的に開き、`http://localhost:8501` でアプリが立ち上がります。
-
-## 🛠️ 技術スタック (Tech Stack)
-
-* **Frontend/Backend**: [Streamlit](https://streamlit.io/)
-* **Video Processing**: [OpenCV](https://opencv.org/) (`opencv-python-headless`)
-* **AI/LLM Routing**: [OpenRouter API](https://openrouter.ai/)
-* **Supported Models**: `google/gemini-3.1-pro-preview`, `qwen/qwen3.5-35b-a3b`, etc.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10+-3776ab?style=for-the-badge&logo=python&logoColor=white" alt="Python" /> <img src="https://img.shields.io/badge/Streamlit-1.32+-ff4b4b?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" /> <img src="https://img.shields.io/badge/OpenCV-4.8+-5c3ee8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV" /> <img src="https://img.shields.io/badge/OpenRouter-Multi-VLM-6366f1?style=for-the-badge&logo=openai&logoColor=white" alt="OpenRouter" />
+</p>
 
 ---
 
-*Developed by Shogo Miyawaki*
+## ✨ Features (Key Outcomes & Capabilities)
+
+| Icon | Feature | Outcome & Real Proof |
+| :---: | :--- | :--- |
+| 🎥 | **Smart Keyframe Extraction** | Extracts optimal keyframes using OpenCV scene variance, preserving narrative context while minimizing token cost |
+| 🧠 | **State-of-the-Art Multi-VLM** | Direct integration with Gemini 3.1 Pro, Qwen 2.5 VL, and Claude 3.5 Sonnet via OpenRouter |
+| 📐 | **Cinematography Deconstruction** | Analyzes shot scale, angle, camera dynamics (pan, tilt, dolly), key/fill lighting, color grading, and emotional arc |
+| 📊 | **Structured Director Report** | Generates production-ready breakdown tables and directorial critique instantly in Markdown |
+
+---
+
+## 📊 Architecture & Flow
+
+```mermaid
+graph LR
+  Video[📹 Input Video .mp4] --> CV[👁️ OpenCV Keyframe Extractor]
+  CV --> Frames[🖼️ Selected Keyframes]
+  Frames --> VLM[🧠 Multi-VLM via OpenRouter]
+  VLM --> Analysis[📊 Cinematography & Director Intent Analysis]
+  Analysis --> UI[💻 Streamlit Interactive Dashboard]
+  
+  classDef primary fill:#ec4899,stroke:#be185d,stroke-width:2px,color:#fff;
+  classDef accent fill:#8b5cf6,stroke:#6d28d9,stroke-width:2px,color:#fff;
+  class CV,VLM primary;
+  class Analysis,UI accent;
+```
+
+---
+
+## 📁 Project Structure
+
+```bash
+ai-video-director/
+├── 📁 assets/                 # High-resolution SVG banners & media
+├── 📄 app.py                  # Streamlit application entry point
+├── 📄 requirements.txt        # Python dependencies
+└── 📄 README.md               # Project documentation
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Check language runtimes (Python / Node.js) and system dependencies.
+
+```bash
+# 1. Clone & enter repository
+git clone https://github.com/LoNebula/ai-video-director.git
+cd ai-video-director
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Launch application
+streamlit run app.py
+```
+
+---
+
+## 💡 Usage Notes & Tips
+
+> [!TIP]
+> Ensure all required environment variables and dependencies are properly configured before execution.
+
+---
+
+<p align="center">
+  Released under the <a href="LICENSE">MIT License</a>. Made with ❤️ by <a href="https://github.com/LoNebula">LoNebula</a>
+</p>
